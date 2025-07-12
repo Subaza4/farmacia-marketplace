@@ -21,14 +21,26 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // Swagger
                         .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
+                        // Auth
+                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                        // Registro de cliente (público)
                         .requestMatchers("/api/usuarios/registrar-cliente").permitAll()
+                        // Rutas protegidas con roles (verificados por @PreAuthorize)
+                        .requestMatchers(
+                                "/api/usuarios/**",
+                                "/api/productos/**",
+                                "/api/categorias/**",
+                                "/api/pedidos/**",
+                                "/api/detalle-pedido/**",
+                                "/api/carrito/**"
+                        ).authenticated()
+                        // Cualquier otra ruta requiere autenticación
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

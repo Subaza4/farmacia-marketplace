@@ -35,6 +35,7 @@ public class CarritoController {
     }
 
     @PutMapping("/{usuarioId}/actualizar")
+    @PreAuthorize("hasRole('CLIENTE')")
     public ResponseEntity<Carrito> actualizarCantidad(
             @PathVariable Long usuarioId,
             @RequestBody CarritoProductoRequest request
@@ -44,6 +45,7 @@ public class CarritoController {
     }
 
     @DeleteMapping("/{usuarioId}/producto/{productoId}")
+    @PreAuthorize("hasRole('CLIENTE')")
     public ResponseEntity<Void> eliminarProducto(
             @PathVariable Long usuarioId,
             @PathVariable Long productoId

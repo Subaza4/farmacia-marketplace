@@ -6,6 +6,7 @@ import com.example.marketplace.model.utils.JwtUtil;
 import com.example.marketplace.model.utils.Rol;
 import com.example.marketplace.services.impl.UserDetailsServiceImpl;
 import com.example.marketplace.services.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/login-cliente")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody AuthRequest request) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getCorreo(), request.getContrasena()));
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getCorreo());
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/registra-cliente")
-    public ResponseEntity<Usuario> registrarCliente(@RequestBody RegistroUsuarioRequest request) {
+    public ResponseEntity<Usuario> registrarCliente(@Valid @RequestBody RegistroUsuarioRequest request) {
         Usuario nuevo = new Usuario();
         nuevo.setNombre(request.getNombre());
         nuevo.setCorreo(request.getCorreo());
@@ -53,16 +54,29 @@ public class AuthController {
         return ResponseEntity.ok(usuarioService.guardar(nuevo));
     }
 
-    @PostMapping("/registrar-admin-libre")
-    public ResponseEntity<Usuario> registrarAdminLibre(@RequestBody RegistroUsuarioRequest request) {
+    // Crear nuevo usuario ADMIN
+    @PostMapping("/registrar-admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Usuario> registrarAdmin(@RequestBody @Valid RegistroUsuarioRequest request) {
         Usuario nuevo = new Usuario();
         nuevo.setNombre(request.getNombre());
         nuevo.setCorreo(request.getCorreo());
         nuevo.setContrasena(passwordEncoder.encode(request.getContrasena()));
-        nuevo.setRol(Rol.ADMIN); // 👈 asigna rol ADMIN
+        nuevo.setRol(Rol.ADMIN);  // 👈 solo ADMIN puede crear este rol
 
         return ResponseEntity.ok(usuarioService.guardar(nuevo));
     }
+
+//    @PostMapping("/registrar-admin-libre")
+//    public ResponseEntity<Usuario> registrarAdminLibre(@RequestBody RegistroUsuarioRequest request) {
+//        Usuario nuevo = new Usuario();
+//        nuevo.setNombre(request.getNombre());
+//        nuevo.setCorreo(request.getCorreo());
+//        nuevo.setContrasena(passwordEncoder.encode(request.getContrasena()));
+//        nuevo.setRol(Rol.ADMIN); // 👈 asigna rol ADMIN
+//
+//        return ResponseEntity.ok(usuarioService.guardar(nuevo));
+//    }
 
     @Data
     public static class AuthRequest {

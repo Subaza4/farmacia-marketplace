@@ -24,6 +24,7 @@ public class ProductoController {
 
     // Buscar por ID
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CLIENTE','ADMIN')")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
         return productoService.obtenerPorId(id)
                 .map(ResponseEntity::ok)
@@ -32,26 +33,28 @@ public class ProductoController {
 
     // Buscar por nombre
     @GetMapping("/buscar")
+    @PreAuthorize("hasAnyRole('CLIENTE','ADMIN')")
     public ResponseEntity<List<Producto>> buscarPorNombre(@RequestParam String nombre) {
         return ResponseEntity.ok(productoService.buscarPorNombre(nombre));
     }
 
     // Buscar por categoría
     @GetMapping("/categoria/{categoriaId}")
+    @PreAuthorize("hasAnyRole('CLIENTE','ADMIN')")
     public ResponseEntity<List<Producto>> listarPorCategoria(@PathVariable Long categoriaId) {
         return ResponseEntity.ok(productoService.listarPorCategoria(categoriaId));
     }
 
     // Crear producto
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
         return ResponseEntity.ok(productoService.guardar(producto));
     }
 
     // Actualizar producto
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto) {
         try {
             return ResponseEntity.ok(productoService.actualizar(id, producto));
