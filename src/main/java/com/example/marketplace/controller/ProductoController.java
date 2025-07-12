@@ -4,6 +4,7 @@ import com.example.marketplace.model.Producto;
 import com.example.marketplace.services.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,12 +43,14 @@ public class ProductoController {
     }
 
     // Crear producto
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
         return ResponseEntity.ok(productoService.guardar(producto));
     }
 
     // Actualizar producto
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto) {
         try {
@@ -58,6 +61,7 @@ public class ProductoController {
     }
 
     // Eliminar producto
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         productoService.eliminar(id);

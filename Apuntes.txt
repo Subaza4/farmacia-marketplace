@@ -1,0 +1,17 @@
+Ejemplos de JSON para probar
+POST /api/carrito/1/agregar
+  json
+  {
+    "productoId": 3,
+    "cantidad": 2
+  }
+PUT /api/carrito/1/actualizar
+  json
+  {
+    "productoId": 3,
+    "cantidad": 5
+  }
+
+
+MYSQL
+docker run --name mysql-marketplace -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=marketplace_db -p 3306:3306 -d mysql:8

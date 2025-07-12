@@ -6,6 +6,7 @@ import com.example.marketplace.services.service.CarritoService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,12 +17,14 @@ public class CarritoController {
     @Autowired
     private CarritoService carritoService;
 
+    @PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/{usuarioId}")
     public ResponseEntity<Carrito> obtenerCarrito(@PathVariable Long usuarioId) {
         Carrito carrito = carritoService.obtenerCarritoPorUsuario(usuarioId);
         return ResponseEntity.ok(carrito);
     }
 
+    @PreAuthorize("hasRole('CLIENTE')")
     @PostMapping("/{usuarioId}/agregar")
     public ResponseEntity<Carrito> agregarProducto(
             @PathVariable Long usuarioId,
@@ -49,6 +52,7 @@ public class CarritoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('CLIENTE')")
     @DeleteMapping("/{usuarioId}/vaciar")
     public ResponseEntity<Void> vaciarCarrito(@PathVariable Long usuarioId) {
         carritoService.vaciarCarrito(usuarioId);
