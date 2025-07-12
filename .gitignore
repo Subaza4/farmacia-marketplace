@@ -31,3 +31,29 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Node.js y Angular ###
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de compilación de Angular
+/farmacia/dist/
+/farmacia/.angular/
+/farmacia/.tmp/
+
+# Archivos de cobertura
+/farmacia/coverage/
+
+# Archivos de caché
+.npm
+.yarn-integrity
