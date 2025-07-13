@@ -70,7 +70,7 @@ public class CarritoServiceImpl implements CarritoService {
             item.setCantidad(item.getCantidad() + cantidad);
             item.setSubtotal(item.getPrecioUnitario().multiply(BigDecimal.valueOf(item.getCantidad())));
         }
-
+        carrito.setId(null);
         calcularTotal(carrito);
         return carritoRepository.save(carrito);
     }

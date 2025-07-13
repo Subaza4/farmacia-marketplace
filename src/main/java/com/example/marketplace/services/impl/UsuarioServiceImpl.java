@@ -44,6 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuario.setTelefono(usuarioActualizado.getTelefono());
             usuario.setDireccion(usuarioActualizado.getDireccion());
             usuario.setRol(usuarioActualizado.getRol());
+            usuario.setId(null);
             return usuarioRepository.save(usuario);
         }).orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }

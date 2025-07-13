@@ -41,6 +41,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         pedido.setTotal(total);
         pedido.setEstado(EstadoPedido.PENDIENTE);
+        pedido.setId(null);
 
         return pedidoRepository.save(pedido);
     }

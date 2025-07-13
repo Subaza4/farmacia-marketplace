@@ -27,6 +27,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public Categoria guardar(Categoria categoria) {
+        categoria.setId(null);
         return categoriaRepository.save(categoria);
     }
 
