@@ -1,6 +1,7 @@
 package com.example.marketplace.services.impl;
 
 import com.example.marketplace.model.Usuario;
+import com.example.marketplace.model.utils.Rol;
 import com.example.marketplace.repository.UsuarioRepository;
 import com.example.marketplace.services.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Rol getRolUser(String correo) {
+        return usuarioRepository.findRolByCorreo(correo);
     }
 }

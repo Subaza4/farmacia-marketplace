@@ -29,14 +29,19 @@ export class LoginComponent {
     const { correo, contrasena } = this.loginForm.value;
 
     this.authService.login({ correo, contrasena }).subscribe({
-      next: (token: string) => {
-        console.log('Token:', token);
-        localStorage.setItem('token', token);
-        this.router.navigate(['/mercado']); // o la ruta que necesites
+      next: (token) => {
+        console.log("token", token)
+        // Guarda el token
+        this.authService.saveToken(token);
+
+        // Guarda el correo en localStorage si lo necesitas después
+        localStorage.setItem('correo', correo);
+
+        // Redirecciona
+        this.router.navigate(['/productos']);
       },
-      error: (error) => {
-        console.error('Error al iniciar sesión:', error);
-        // Aquí podrías mostrar un mensaje de error visual
+      error: (err) => {
+        console.error('Error al iniciar sesión:', err);
       }
     });
   }

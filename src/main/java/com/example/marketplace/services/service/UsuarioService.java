@@ -1,6 +1,7 @@
 package com.example.marketplace.services.service;
 
 import com.example.marketplace.model.Usuario;
+import com.example.marketplace.model.utils.Rol;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,6 @@ public interface UsuarioService {
     Usuario actualizar(Long id, Usuario usuarioActualizado);
 
     void eliminar(Long id);
+
+    Rol getRolUser(String correo);
 }

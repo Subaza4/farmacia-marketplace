@@ -83,4 +83,10 @@ public class AuthController {
         private String correo;
         private String contrasena;
     }
+
+    @GetMapping("/rol")
+    public ResponseEntity<Rol> getRolUser(@RequestParam String correo) {
+        Rol rol = usuarioService.getRolUser(correo);
+        return ResponseEntity.ok(rol);
+    }
 }
