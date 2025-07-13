@@ -35,7 +35,7 @@ import {LayoutComponent} from "./layout/layout.component";
     MatToolbarModule,
     MatListModule,
     MatIconModule,
-
+    MatSidenavModule
   ],
   bootstrap: [AppComponent]
 })

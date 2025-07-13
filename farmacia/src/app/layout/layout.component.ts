@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {MatSidenavContainer} from '@angular/material/sidenav';
+import {MatSidenavContainer, MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbar} from '@angular/material/toolbar';
 import {MatNavList} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
@@ -13,7 +13,8 @@ import {MatIcon} from '@angular/material/icon';
     MatToolbar,
     MatNavList,
     RouterOutlet,
-    MatIcon
+    MatIcon,
+    MatSidenavModule
   ],
   styleUrls: ['./layout.component.scss']
 })
