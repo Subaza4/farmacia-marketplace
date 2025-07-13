@@ -1,6 +1,7 @@
 package com.example.marketplace.config;
 
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.*;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -21,6 +22,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Swagger
                         .requestMatchers(
                                 "/swagger-ui.html",

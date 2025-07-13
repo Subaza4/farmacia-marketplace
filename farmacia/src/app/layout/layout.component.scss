@@ -1,0 +1,18 @@
+/* layout.component.scss */
+.sidenav-container {
+  height: 100vh;
+}
+
+.main-content {
+  padding: 1rem;
+}
+
+.hide-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hide-desktop {
+    display: inline-block;
+  }
+}

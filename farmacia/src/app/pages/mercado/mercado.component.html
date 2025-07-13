@@ -1,0 +1,16 @@
+<div class="buscador-container">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar por nombre o categoría</mat-label>
+    <input matInput [formControl]="filtro" placeholder="Ej. Paracetamol o Analgésico">
+  </mat-form-field>
+
+  <div class="tarjetas">
+    <mat-card *ngFor="let producto of productosFiltrados" class="tarjeta-producto">
+      <mat-card-title>{{ producto.nombre }}</mat-card-title>
+      <mat-card-subtitle>Categoría: {{ producto.categoria }}</mat-card-subtitle>
+      <mat-card-content>
+        <p>{{ producto.descripcion }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

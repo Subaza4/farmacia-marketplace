@@ -1,0 +1,25 @@
+.login-container {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1588776814546-cb8e35e85b67'); // Imagen relacionada con farmacia
+background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.register-link {
+  margin-top: 1rem;
+  text-align: center;
+}
